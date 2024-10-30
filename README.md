@@ -50,4 +50,4 @@ Todas as funções de conversão de moeda são puras, ou seja, dado um mesmo con
 
 ---
 
-Agradeço por conferir nosso projeto! Esperamos que você o ache interessante. 🚀
+Agradeço por conferir meu projeto! Espero que você o ache interessante. 🚀

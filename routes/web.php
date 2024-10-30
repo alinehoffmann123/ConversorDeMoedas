@@ -1,10 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route; 
-use App\Http\Controllers\ConvertorController;
+use App\Http\Controllers\ConversorController;
 
-// Rota para exibir o formulário
-Route::get('/', [ConvertorController::class, 'index'])->name('converter.form');
-
-// Rota para processar a conversão
-Route::post('/convert', [ConvertorController::class, 'convert'])->name('converter.convert');
+Route::get('/', [ConversorController::class, 'index'])->name('converter.form');
+Route::post('/converter', [ConversorController::class, 'converter'])->name('converter.converter');

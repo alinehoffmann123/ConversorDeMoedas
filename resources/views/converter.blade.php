@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conversor de Moedas</title>
+    <title>Conversor de Moedas 🌍💰</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <style>
@@ -11,7 +11,7 @@
     </style>
 </head>
 <body>
-    <h1>Conversor de Moedas</h1>
+    <h1>Conversor de Moedas 🌍💰</h1>
     <div class="container">
         @if ($errors->any())
             <div class="error">
@@ -23,38 +23,57 @@
             </div>
         @endif
 
-        <form action="{{ route('converter.convert') }}" method="POST">
+        <form action="{{ route('converter.converter') }}" method="POST">
             @csrf
             <label for="valor">Valor:</label>
-            <input type="text" id="valor" name="valor" value="{{ old('valor') }}" required placeholder="Digite o valor">
+            <input type="number" step="0.01" min="0.01" id="valor" name="valor" value="{{ old('valor') }}" placeholder="Digite o valor">
             
             <label for="de_moeda">De:</label>
             <select id="de_moeda" name="de_moeda" required>
-                @foreach ($moedas as $codigo => $nome)
-                    <option value="{{ $codigo }}" {{ old('de_moeda') == $codigo ? 'selected' : '' }}>{{ $nome }}</option>
+                @foreach ($sMoedas as $iKey => $sNome)
+                    <option value="{{ $iKey }}" {{ old('de_moeda') == $iKey ? 'selected' : '' }}>{{ $sNome }}</option>
                 @endforeach
             </select>
 
             <label for="para_moeda">Para:</label>
             <select id="para_moeda" name="para_moeda" required>
-                @foreach ($moedas as $codigo => $nome)
-                    <option value="{{ $codigo }}" {{ old('para_moeda') == $codigo ? 'selected' : '' }}>{{ $nome }}</option>
+                @foreach ($sMoedas as $iKey => $sNome)
+                    <option value="{{ $iKey }}" {{ old('para_moeda') == $iKey ? 'selected' : '' }}>{{ $sNome }}</option>
                 @endforeach
             </select>
 
-            <label for="taxa_cambio">Taxa de Câmbio:</label>
-            <input type="text" id="taxa_cambio" name="taxa_cambio" value="{{ old('taxa_cambio') }}" required placeholder="Digite a taxa de câmbio">
-            
-            <button type="submit"><i class="fas fa-exchange-alt"></i> Converter</button>
+            <button type="submit" id="btnConverter" disabled><i class="fas fa-exchange-alt"></i> Converter</button>
         </form>
 
-        @if (isset($vValorConvertido))
+        @if (isset($nValorConvertido))
             <div class="result">
                 <h2>Resultado da Conversão:</h2>
-                <p>{{ $vValor }} {{ $sDeMoeda }} = {{ number_format($vValorConvertido, 2) }} {{ $sParaMoeda }}</p>
-                <p>Taxa de Câmbio: {{ number_format($fTaxaCambio, 2) }}</p>
+                <p>{{ $nValor }} {{ $sDeMoeda }} = {{ number_format($nValorConvertido, 2) }} {{ $sParaMoeda }}</p>
             </div>
         @endif
     </div>
+
+    <script>
+        const sMoedaDe      = document.getElementById('de_moeda');
+        const sMoedaPara    = document.getElementById('para_moeda');
+        const nValorImput   = document.getElementById('valor');
+        const sBtnConverter = document.getElementById('btnConverter');
+
+        // Função para desabilitar o botão se as moedas forem iguais ou se o valor for inválido
+        function jVereficarCondicoes() {
+            const sMoedasDiferentes = sMoedaDe.value !== sMoedaPara.value;
+            const nValorValido      = parseFloat(nValorImput.value) > 0;
+
+            // Habilita o botão se ambas as condições forem verdadeiras
+            sBtnConverter.disabled = !(sMoedasDiferentes && nValorValido);
+        }
+
+        // Adicionando eventos para verificar sempre que houver mudanças nos selects e no input de valor
+        sMoedaDe.addEventListener('change', jVereficarCondicoes);
+        sMoedaPara.addEventListener('change', jVereficarCondicoes);
+        nValorImput.addEventListener('input', jVereficarCondicoes);
+
+        jVereficarCondicoes();
+    </script>
 </body>
 </html>
