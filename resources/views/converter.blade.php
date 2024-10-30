@@ -52,6 +52,9 @@
             </div>
         @endif
     </div>
+    <footer style="text-align: center; padding: 10px; margin-top: 20px; background-color: #f1f1f1;">
+        <p>Desenvolvido por Aline Fernanda Hoffmann</p>
+    </footer>
 
     <script>
         const sMoedaDe      = document.getElementById('de_moeda');
