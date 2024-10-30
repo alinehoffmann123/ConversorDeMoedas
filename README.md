@@ -34,7 +34,7 @@ Para converter R$ 85,00 de Real (BRL) para Dólar (USD) com uma taxa de câmbio 
 - **De Moeda**: Real (BRL) 
 - **Para Moeda**: Dólar (USD) 
 - **Taxa de Câmbio**: 5 
-A saída será: **Valor Convertido**: USD 17,00.
+A saída será: **Valor Convertido**: USD 14.74.
 
 ---
 
