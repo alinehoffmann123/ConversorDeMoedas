@@ -3,8 +3,13 @@ name: Hello World Action
 on: [push]
 
 jobs:
-  say-hello:
+  teste:
     runs-on: ubuntu-latest
     steps:
       - name: Print Hello World
-        run: echo "Hello, World!"
+        run: echo "Executando teste"
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Hello World
+        run: echo Executando build"
