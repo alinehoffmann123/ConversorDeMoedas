@@ -16,3 +16,10 @@
         "vite": "^5.0"
     }
 }
+
+{
+  "scripts": {
+    "lint": "eslint ."
+  }
+}
+
